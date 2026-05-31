@@ -4,6 +4,7 @@ vnet_name                = "vnet-dev-app"
 vnet_address_space       = ["10.10.0.0/16"]
 subnet_name              = "subnet-dev-app"
 subnet_address_prefixes  = ["10.10.1.0/24"]
+storage_account_name     = "devstorageacct001"
 
 # VM variables (replace the SSH key value with your public key)
 vm_name                 = "dev-simple-linux-vm"
