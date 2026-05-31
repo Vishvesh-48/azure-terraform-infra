@@ -18,10 +18,14 @@ stages:
         steps:
           - checkout: self
 
-          - task: TerraformInstaller@1
-            displayName: Install Terraform
-            inputs:
-              terraformVersion: 'latest'
+          - script: |
+            sudo apt-get update
+            sudo apt-get install -y wget unzip
+            wget -O terraform.zip https://releases.hashicorp.com/terraform/1.8.5/terraform_1.8.5_linux_amd64.zip
+            unzip terraform.zip
+            sudo mv terraform /usr/local/bin/
+            terraform version
+          displayName: Install Terraform
 
           - task: AzureCLI@2
             displayName: Terraform Init
