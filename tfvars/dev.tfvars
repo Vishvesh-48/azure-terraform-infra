@@ -1,4 +1,4 @@
-resource_group_name      = "rg-dev-app"
+resource_group_name      = "rg-dev-app-new"
 location                 = "Central India"
 vnet_name                = "vnet-dev-app"
 vnet_address_space       = ["10.10.0.0/16"]
