@@ -27,3 +27,57 @@ variable "subnet_address_prefixes" {
   description = "Address prefix for subnet"
   type        = list(string)
 }
+
+variable "vm_name" {
+  description = "Name of the virtual machine"
+  type        = string
+  default     = "simple-linux-vm"
+}
+
+variable "vm_size" {
+  description = "Size of the virtual machine"
+  type        = string
+  default     = "Standard_B1s"
+}
+
+variable "admin_username" {
+  description = "Admin username for the VM"
+  type        = string
+  default     = "azureuser"
+}
+
+variable "admin_ssh_public_key" {
+  description = "SSH public key for the admin user (set in tfvars or CI)."
+  type        = string
+  default     = ""
+}
+
+variable "os_disk_size_gb" {
+  description = "OS disk size in GB"
+  type        = number
+  default     = 30
+}
+
+variable "image_publisher" {
+  description = "Image publisher for the VM"
+  type        = string
+  default     = "Canonical"
+}
+
+variable "image_offer" {
+  description = "Image offer for the VM"
+  type        = string
+  default     = "UbuntuServer"
+}
+
+variable "image_sku" {
+  description = "Image SKU for the VM"
+  type        = string
+  default     = "18.04-LTS"
+}
+
+variable "image_version" {
+  description = "Image version for the VM"
+  type        = string
+  default     = "latest"
+}
