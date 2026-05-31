@@ -7,7 +7,7 @@ subnet_address_prefixes  = ["10.10.1.0/24"]
 
 # VM variables (replace the SSH key value with your public key)
 vm_name                 = "dev-simple-linux-vm"
-vm_size                 = "Standard_B1s"
+vm_size                 = "Standard_B2s"
 # admin_username can be left default (azureuser) or overridden
 admin_username          = "azureuser"
 admin_password = "Password@12345"
