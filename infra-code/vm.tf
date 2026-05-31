@@ -48,10 +48,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   size                = var.vm_size
   admin_username      = var.admin_username
 
-  admin_ssh_key {
-    username   = var.admin_username
-    public_key = var.admin_ssh_public_key
-  }
+  admin_password = var.admin_password
+
 
   network_interface_ids = [azurerm_network_interface.nic.id]
 

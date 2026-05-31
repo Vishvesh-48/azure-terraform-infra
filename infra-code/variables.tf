@@ -46,10 +46,11 @@ variable "admin_username" {
   default     = "azureuser"
 }
 
-variable "admin_ssh_public_key" {
-  description = "SSH public key for the admin user (set in tfvars or CI)."
+variable "admin_password" {
+  description = "Admin username for the VM"
   type        = string
-  default     = ""
+  default     = Password@12345
+
 }
 
 variable "os_disk_size_gb" {
