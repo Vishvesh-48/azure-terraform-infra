@@ -47,10 +47,10 @@ variable "admin_username" {
 }
 
 variable "admin_password" {
-  description = "Admin username for the VM"
+  description = "Admin password for the VM"
   type        = string
-  default     = Password@12345
-
+  default     = "Password@12345"
+  sensitive   = true
 }
 
 variable "os_disk_size_gb" {
