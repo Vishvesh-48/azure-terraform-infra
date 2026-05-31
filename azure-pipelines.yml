@@ -1,0 +1,112 @@
+trigger: none
+pr: none
+
+variables:
+  terraformWorkingDirectory: '$(System.DefaultWorkingDirectory)/infra-code'
+  tfvarsPath: '$(System.DefaultWorkingDirectory)/tfvars/dev.tfvars'
+  azureServiceConnection: 'azure-sp-terraform'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: Terraform_Plan
+    displayName: Terraform Plan - Dev
+    jobs:
+      - job: Plan
+        displayName: Run Terraform Plan
+        steps:
+          - checkout: self
+
+          - task: AzureCLI@2
+            displayName: Terraform Init
+            inputs:
+              azureSubscription: '$(azureServiceConnection)'
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                cd $(terraformWorkingDirectory)
+                terraform init
+
+          - task: AzureCLI@2
+            displayName: Terraform Format Check
+            inputs:
+              azureSubscription: '$(azureServiceConnection)'
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                cd $(terraformWorkingDirectory)
+                terraform fmt -check -recursive
+
+          - task: AzureCLI@2
+            displayName: Terraform Validate
+            inputs:
+              azureSubscription: '$(azureServiceConnection)'
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                cd $(terraformWorkingDirectory)
+                terraform validate
+
+          - task: AzureCLI@2
+            displayName: Terraform Plan
+            inputs:
+              azureSubscription: '$(azureServiceConnection)'
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                cd $(terraformWorkingDirectory)
+                terraform plan \
+                  -var-file="$(tfvarsPath)" \
+                  -out=tfplan
+
+          - task: AzureCLI@2
+            displayName: Show Terraform Plan in Logs
+            inputs:
+              azureSubscription: '$(azureServiceConnection)'
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                cd $(terraformWorkingDirectory)
+                terraform show -no-color tfplan
+
+          - publish: $(terraformWorkingDirectory)/tfplan
+            artifact: terraform-plan
+            displayName: Publish Terraform Plan Artifact
+
+  - stage: Terraform_Apply
+    displayName: Terraform Apply - Dev
+    dependsOn: Terraform_Plan
+    condition: succeeded()
+    jobs:
+      - deployment: Apply
+        displayName: Apply Terraform Plan
+        environment: dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+
+                - download: current
+                  artifact: terraform-plan
+
+                - task: AzureCLI@2
+                  displayName: Terraform Init
+                  inputs:
+                    azureSubscription: '$(azureServiceConnection)'
+                    scriptType: bash
+                    scriptLocation: inlineScript
+                    inlineScript: |
+                      cd $(terraformWorkingDirectory)
+                      terraform init
+
+                - task: AzureCLI@2
+                  displayName: Terraform Apply
+                  inputs:
+                    azureSubscription: '$(azureServiceConnection)'
+                    scriptType: bash
+                    scriptLocation: inlineScript
+                    inlineScript: |
+                      cd $(terraformWorkingDirectory)
+                      terraform apply -auto-approve "$(Pipeline.Workspace)/terraform-plan/tfplan"
