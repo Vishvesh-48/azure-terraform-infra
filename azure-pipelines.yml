@@ -109,4 +109,4 @@ stages:
                     scriptLocation: inlineScript
                     inlineScript: |
                       cd $(terraformWorkingDirectory)
-                      terraform apply -auto-approve "$(Pipeline.Workspace)/terraform-plan/tfplan"
+                      terraform apply -auto-approve "$(Pipeline.Workspace)/terraform-plan/tfplan" 
