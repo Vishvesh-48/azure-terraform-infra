@@ -1,5 +1,5 @@
 resource_group_name      = "rg-dev-app"
-location                 = "eastus"
+location                 = "Central India"
 vnet_name                = "vnet-dev-app"
 vnet_address_space       = ["10.10.0.0/16"]
 subnet_name              = "subnet-dev-app"
@@ -7,7 +7,7 @@ subnet_address_prefixes  = ["10.10.1.0/24"]
 
 # VM variables (replace the SSH key value with your public key)
 vm_name                 = "dev-simple-linux-vm"
-vm_size                 = "Standard_B2s"
+vm_size                 = "Standard_D2s_v3"
 # admin_username can be left default (azureuser) or overridden
 admin_username          = "azureuser"
 admin_password = "Password@12345"
