@@ -5,6 +5,7 @@ variables:
   terraformWorkingDirectory: '$(System.DefaultWorkingDirectory)/infra-code'
   tfvarsPath: '$(System.DefaultWorkingDirectory)/tfvars/dev.tfvars'
   azureServiceConnection: 'azure-sp-terraform'
+  terraformVersion: '1.8.5'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -19,13 +20,14 @@ stages:
           - checkout: self
 
           - script: |
-            sudo apt-get update
-            sudo apt-get install -y wget unzip
-            wget -O terraform.zip https://releases.hashicorp.com/terraform/1.8.5/terraform_1.8.5_linux_amd64.zip
-            unzip terraform.zip
-            sudo mv terraform /usr/local/bin/
-            terraform version
-          displayName: Install Terraform
+              echo "Installing Terraform..."
+              sudo apt-get update
+              sudo apt-get install -y wget unzip
+              wget -O terraform.zip https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip
+              unzip terraform.zip
+              sudo mv terraform /usr/local/bin/
+              terraform version
+            displayName: Install Terraform
 
           - task: AzureCLI@2
             displayName: Terraform Init
@@ -91,10 +93,15 @@ stages:
                 - download: current
                   artifact: terraform-plan
 
-                - task: TerraformInstaller@1
+                - script: |
+                    echo "Installing Terraform..."
+                    sudo apt-get update
+                    sudo apt-get install -y wget unzip
+                    wget -O terraform.zip https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip
+                    unzip terraform.zip
+                    sudo mv terraform /usr/local/bin/
+                    terraform version
                   displayName: Install Terraform
-                  inputs:
-                    terraformVersion: 'latest'
 
                 - task: AzureCLI@2
                   displayName: Terraform Init
