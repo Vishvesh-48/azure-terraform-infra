@@ -82,3 +82,23 @@ variable "image_version" {
   type        = string
   default     = "latest"
 }
+
+# storage account 
+
+variable "storage_account_name" {
+  description = "Name of the Azure Storage Account"
+  type        = string
+  default     = "tfstorageacct001"
+}
+
+variable "storage_account_tier" {
+  description = "Storage account tier"
+  type        = string
+  default     = "Standard"
+}
+
+variable "storage_account_replication_type" {
+  description = "Storage account replication type"
+  type        = string
+  default     = "GRS"
+}
