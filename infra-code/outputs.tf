@@ -13,6 +13,6 @@ output "application_insights_id" {
   value = azurerm_application_insights.aiops_appinsights.id
 }
 
-output "application_insights_id" {
-  value = azurerm_application_insights.aiops_appinsights.id
+output "log_analytics_id" {
+  value = azurerm_log_analytics_workspace.aiops_logs.id
 }
