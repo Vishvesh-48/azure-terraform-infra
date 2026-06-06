@@ -12,3 +12,7 @@ output "subnet_name" {
 output "application_insights_id" {
   value = azurerm_application_insights.aiops_appinsights.id
 }
+
+output "application_insights_id" {
+  value = azurerm_application_insights.aiops_appinsights.id
+}
