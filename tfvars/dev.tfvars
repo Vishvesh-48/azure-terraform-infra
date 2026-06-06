@@ -1,5 +1,6 @@
 resource_group_name      = "rg-dev-app"
 location                 = "Central India"
+log_analytics_workspace_name = "aiops-logs-workspace"
 vnet_name                = "vnet-dev-app"
 vnet_address_space       = ["10.10.0.0/16"]
 subnet_name              = "subnet-dev-app"
