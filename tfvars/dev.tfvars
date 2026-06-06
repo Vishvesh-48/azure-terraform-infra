@@ -1,10 +1,13 @@
 resource_group_name      = "rg-dev-app"
 location                 = "Central India"
+log_analytics_workspace_name = "aiops-logs-workspace"
 vnet_name                = "vnet-dev-app"
 vnet_address_space       = ["10.10.0.0/16"]
 subnet_name              = "subnet-dev-app"
 subnet_address_prefixes  = ["10.10.1.0/24"]
 storage_account_name     = "vishveshstorage98"
+app_insights_name        = "dev-aiops-appinsights"
+app_insights_type        = "web"
 
 # VM variables (replace the SSH key value with your public key)
 vm_name                 = "dev-simple-linux-vm"
