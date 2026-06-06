@@ -9,3 +9,6 @@ output "vnet_name" {
 output "subnet_name" {
   value = azurerm_subnet.subnet.name
 }
+output "application_insights_id" {
+  value = azurerm_application_insights.aiops_appinsights.id
+}

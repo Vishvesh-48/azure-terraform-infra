@@ -107,3 +107,12 @@ variable "log_analytics_workspace_name" {
   description = "Name of the Log Analytics Workspace"
   type        = string
 }
+variable "app_insights_name" {
+  description = "Name of the Application Insights resource"
+  type        = string
+}
+
+variable "app_insights_type" {
+  description = "Application Insights application type"
+  type        = string
+}
