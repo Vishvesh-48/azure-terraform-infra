@@ -102,3 +102,12 @@ variable "storage_account_replication_type" {
   type        = string
   default     = "GRS"
 }
+variable "app_insights_name" {
+  description = "Name of the Application Insights resource"
+  type        = string
+}
+
+variable "app_insights_type" {
+  description = "Application Insights application type"
+  type        = string
+}
