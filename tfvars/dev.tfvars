@@ -26,7 +26,7 @@ os_disk_size_gb         = 30
 #image_version          = "latest"
 # Tfvars
 # Azure OpenAI
-openai_api_key         = "DcMKd1cBFy2iCUgsT93wOivNTubWnhuOuTzZATGTKppcitKgUQw9JQQJ99CFACYeBjFXJ3w3AAABACOG2C9l"
+openai_api_key         = ""
 openai_endpoint        = "https://aiops-openai4.openai.azure.com/"
 openai_deployment_name = "gpt-4o"
 
