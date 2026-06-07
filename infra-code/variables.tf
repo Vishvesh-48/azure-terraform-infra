@@ -116,3 +116,23 @@ variable "app_insights_type" {
   description = "Application Insights application type"
   type        = string
 }
+
+## Variable file
+
+# Azure OpenAI
+variable "openai_api_key" {
+  description = "Azure OpenAI API key"
+  type        = string
+  sensitive   = true
+}
+
+variable "openai_endpoint" {
+  description = "Azure OpenAI endpoint"
+  type        = string
+}
+
+variable "openai_deployment_name" {
+  description = "OpenAI model deployment name"
+  type        = string
+  default     = "gpt-4o"
+}
